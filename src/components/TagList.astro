@@ -1,0 +1,11 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<p class="text-body-sm text-muted leading-[1.5]">
+  {items.join(", ")}
+</p>

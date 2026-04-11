@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+const { title, description, slug, image, imageAlt } = Astro.props;
+---
+
+<article class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8 gap-y-4">
+  <div class="flex flex-col gap-2">
+    <h3 class="text-heading-lg font-medium leading-[1.4]">{title}</h3>
+    <p class="text-body-sm text-muted leading-[1.5]">{description}</p>
+    <a href={`/projects/${slug}`} class="text-body-sm font-medium underline text-foreground">
+      Read case study
+    </a>
+  </div>
+  <div>
+    <Image
+      src={image}
+      alt={imageAlt}
+      class="w-full h-auto rounded-sm"
+      loading="lazy"
+      widths={[640, 960, 1280]}
+      sizes="(max-width: 768px) 100vw, 75vw"
+    />
+  </div>
+</article>

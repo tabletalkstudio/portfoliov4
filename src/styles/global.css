@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FONT
+   ============================================================ */
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   DESIGN TOKENS — Two-tier system: Primitives → Semantic
+   ============================================================ */
+
+@theme {
+  /* --- Primitive Colors (source values) --- */
+  --color-primitive-white: #ffffff;
+  --color-primitive-black: #000000;
+  --color-primitive-gray-50: #fafafa;
+  --color-primitive-gray-100: #f5f5f5;
+  --color-primitive-gray-200: #e5e5e5;
+  --color-primitive-gray-400: #a3a3a3;
+  --color-primitive-gray-500: #737373;
+  --color-primitive-gray-600: #525252;
+  --color-primitive-gray-800: #262626;
+  --color-primitive-gray-900: #171717;
+  --color-primitive-gray-950: #0a0a0a;
+  --color-primitive-blue-600: #2563eb;
+
+  /* --- Semantic Colors --- */
+  --color-foreground: var(--color-primitive-gray-950);
+  --color-muted: var(--color-primitive-gray-600);
+  --color-surface: var(--color-primitive-white);
+  --color-surface-alt: var(--color-primitive-gray-50);
+  --color-border: var(--color-primitive-gray-200);
+  --color-button-bg: var(--color-primitive-gray-950);
+  --color-button-fg: var(--color-primitive-white);
+  --color-link: var(--color-primitive-blue-600);
+  --color-focus-ring: var(--color-primitive-gray-950);
+
+  /* --- Font --- */
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Semantic Typography --- */
+  --text-heading-lg: 1.25rem;
+  --text-heading-lg--line-height: 1.4;
+  --text-heading-lg--font-weight: 500;
+
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+
+  --text-body-sm: 1rem;
+  --text-body-sm--line-height: 1.5;
+
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.5;
+
+  /* --- Semantic Spacing --- */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 3rem;
+  --spacing-gutter: 1.25rem;
+
+  /* --- Layout --- */
+  --max-w-content: 1280px;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--color-foreground);
+  color: var(--color-surface);
+  font-size: var(--text-body-sm);
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

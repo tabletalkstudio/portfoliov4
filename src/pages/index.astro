@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionRow from "../components/SectionRow.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import TimelineEntry from "../components/TimelineEntry.astro";
+import TagList from "../components/TagList.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout title="Mariah Gardziola — Product Design">
+  <div class="flex flex-col gap-section">
+    {/* Hero */}
+    <section class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8 gap-y-4 px-gutter max-w-content mx-auto pt-section">
+      <h1 class="text-heading-lg font-medium leading-[1.4]">Mariah Gardziola</h1>
+      <p class="text-body text-muted leading-[1.6] max-w-2xl">
+        Oregon-based web and interactive designer who leads teams in systems-driven growth design across web and product experiences.
+      </p>
+    </section>
+
+    {/* Selected Work */}
+    <section aria-labelledby="selected-work-label" class="px-gutter max-w-content mx-auto flex flex-col gap-section-sm">
+      <h2 id="selected-work-label" class="text-heading-lg font-medium leading-[1.4]">Selected Work</h2>
+      {projects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          slug={project.data.slug}
+          image={project.data.heroImage}
+          imageAlt={project.data.heroImageAlt}
+        />
+      ))}
+    </section>
+
+    {/* Background */}
+    <SectionRow label="Background" id="background">
+      <div class="flex flex-col gap-section-sm">
+        <TimelineEntry
+          company="Adobe"
+          roles={[
+            { title: "Staff Product Designer, Growth", dates: "5.25—Present" },
+            { title: "Senior Product Designer, Growth", dates: "5.24—5.25" },
+          ]}
+        />
+        <TimelineEntry
+          company="Mission Lane"
+          roles={[
+            { title: "Sr Growth UX Design Manager", dates: "08.22—03.24" },
+          ]}
+        />
+        <TimelineEntry
+          company="Thimble"
+          roles={[
+            { title: "Design Director, Web Experience", dates: "12.21 – 08.22" },
+            { title: "Senior Designer", dates: "12.20 – 12.21" },
+          ]}
+        />
+        <TimelineEntry
+          company="Billtrust"
+          roles={[
+            { title: "Digital Designer", dates: "05.19 – 11.20" },
+          ]}
+        />
+      </div>
+    </SectionRow>
+
+    {/* Clients */}
+    <SectionRow label="Clients" id="clients">
+      <TagList items={[
+        "Adidas", "Adobe", "Spotify", "True Value", "Sunlife", "Cabela's",
+        "Archrival", "Wake Forest Law School", "Office of Experience", "Tallied",
+        "Pawp", "Pure Michigan", "Museum of Science & Industry", "Thresholds",
+        "Detroit City Football Club", "Lightci"
+      ]} />
+    </SectionRow>
+
+    {/* Tools */}
+    <SectionRow label="Tools" id="tools">
+      <TagList items={[
+        "Figma", "Claude", "Cursor", "Webflow", "Github", "UserTesting",
+        "Jira", "Asana", "Framer", "After Effects", "HTML", "CSS", "Spline",
+        "Glyphs", "and Blender"
+      ]} />
+    </SectionRow>
+  </div>
+</BaseLayout>

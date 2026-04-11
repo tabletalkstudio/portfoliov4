@@ -1,0 +1,25 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="px-gutter py-4">
+  <nav aria-label="Main navigation" class="flex items-center justify-between max-w-content mx-auto">
+    <a href="/" class="text-heading-lg font-medium text-foreground leading-[1.4]">mng</a>
+    <div class="flex items-center gap-3">
+      <a
+        href="/"
+        class="text-heading-lg font-medium text-foreground leading-[1.4]"
+        aria-current={currentPath === "/" ? "page" : undefined}
+      >
+        work
+      </a>
+      <a
+        href="/about"
+        class="text-heading-lg font-medium text-foreground leading-[1.4]"
+        aria-current={currentPath === "/about" ? "page" : undefined}
+      >
+        about
+      </a>
+    </div>
+  </nav>
+</header>

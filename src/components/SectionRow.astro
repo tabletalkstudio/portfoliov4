@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string;
+  id?: string;
+  headingLevel?: "h2" | "h3";
+}
+
+const { label, id, headingLevel = "h2" } = Astro.props;
+const labelId = id ? `${id}-label` : `${label.toLowerCase().replace(/\s+/g, "-")}-label`;
+const HeadingTag = headingLevel;
+---
+
+<section id={id} aria-labelledby={labelId} class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8 gap-y-2 px-gutter max-w-content mx-auto">
+  <HeadingTag id={labelId} class="text-heading-lg font-medium leading-[1.4]">
+    {label}
+  </HeadingTag>
+  <div>
+    <slot />
+  </div>
+</section>

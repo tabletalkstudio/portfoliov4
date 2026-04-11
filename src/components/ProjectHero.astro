@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  description: string;
+  credits?: string[];
+  heroImage: ImageMetadata;
+  heroImageAlt: string;
+}
+
+const { title, description, credits, heroImage, heroImageAlt } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8 gap-y-4 px-gutter max-w-content mx-auto">
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1 class="text-heading-lg font-medium leading-[1.4]">{title}</h1>
+      <p class="text-body-sm text-muted leading-[1.5]">{description}</p>
+    </div>
+    {credits && credits.length > 0 && (
+      <div>
+        <p class="text-heading-lg font-medium leading-[1.4]">Credits</p>
+        <p class="text-body-sm text-muted leading-[1.5]">{credits.join(", ")}</p>
+      </div>
+    )}
+  </div>
+  <div>
+    <Image
+      src={heroImage}
+      alt={heroImageAlt}
+      class="w-full h-auto"
+      loading="eager"
+      widths={[640, 960, 1280]}
+      sizes="(max-width: 768px) 100vw, 75vw"
+    />
+  </div>
+</div>

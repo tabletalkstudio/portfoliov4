@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectMeta from "../../components/ProjectMeta.astro";
+import ProjectHero from "../../components/ProjectHero.astro";
+import CaseStudyNav from "../../components/CaseStudyNav.astro";
+import { getCollection, render } from "astro:content";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const project = allProjects.find((p) => p.data.slug === slug);
+
+if (!project) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(project);
+---
+
+<BaseLayout title={`${project.data.title} — Mariah Gardziola`} description={project.data.description}>
+  <div class="flex flex-col gap-section pt-section-sm">
+    <ProjectMeta
+      company={project.data.company}
+      role={project.data.role}
+      years={project.data.years}
+    />
+
+    <ProjectHero
+      title={project.data.title}
+      description={project.data.description}
+      credits={project.data.credits}
+      heroImage={project.data.heroImage}
+      heroImageAlt={project.data.heroImageAlt}
+    />
+
+    <article class="px-gutter max-w-content mx-auto prose prose-neutral">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8">
+        <div></div>
+        <div class="flex flex-col gap-6 text-body-sm text-muted leading-[1.5] [&_h2]:text-heading-lg [&_h2]:font-medium [&_h2]:text-foreground [&_h2]:leading-[1.4] [&_h2]:mt-section-sm [&_h2]:mb-2 [&_p]:mb-4">
+          <Content />
+        </div>
+      </div>
+    </article>
+
+    <CaseStudyNav
+      currentSlug={project.data.slug}
+      projects={allProjects.map((p) => ({ slug: p.data.slug, title: p.data.title }))}
+    />
+  </div>
+</BaseLayout>
