@@ -8,17 +8,17 @@ interface Props {
 const { company, role, years } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 px-gutter max-w-content mx-auto">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 px-gutter w-full max-w-content mx-auto">
   <div>
-    <p class="text-body-sm text-muted leading-[1.5]">company</p>
-    <p class="text-heading-lg font-medium leading-[1.4]">{company}</p>
+    <p class="text-body-sm text-muted">company</p>
+    <p class="text-heading-lg font-medium">{company}</p>
   </div>
   <div>
-    <p class="text-body-sm text-muted leading-[1.5]">role</p>
-    <p class="text-heading-lg font-medium leading-[1.4]">{role}</p>
+    <p class="text-body-sm text-muted">role</p>
+    <p class="text-heading-lg font-medium">{role}</p>
   </div>
   <div>
-    <p class="text-body-sm text-muted leading-[1.5]">years</p>
-    <p class="text-heading-lg font-medium leading-[1.4]">{years}</p>
+    <p class="text-body-sm text-muted">years</p>
+    <p class="text-heading-lg font-medium">{years}</p>
   </div>
 </div>

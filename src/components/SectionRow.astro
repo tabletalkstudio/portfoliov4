@@ -10,8 +10,8 @@ const labelId = id ? `${id}-label` : `${label.toLowerCase().replace(/\s+/g, "-")
 const HeadingTag = headingLevel;
 ---
 
-<section id={id} aria-labelledby={labelId} class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8 gap-y-2 px-gutter max-w-content mx-auto">
-  <HeadingTag id={labelId} class="text-heading-lg font-medium leading-[1.4]">
+<section id={id} aria-labelledby={labelId} class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-2 px-gutter w-full max-w-content mx-auto">
+  <HeadingTag id={labelId} class="text-heading-lg font-medium">
     {label}
   </HeadingTag>
   <div>

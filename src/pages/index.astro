@@ -14,16 +14,16 @@ const projects = (await getCollection("projects")).sort(
 <BaseLayout title="Mariah Gardziola — Product Design">
   <div class="flex flex-col gap-section">
     {/* Hero */}
-    <section class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-8 gap-y-4 px-gutter max-w-content mx-auto pt-section">
-      <h1 class="text-heading-lg font-medium leading-[1.4]">Mariah Gardziola</h1>
-      <p class="text-body text-muted leading-[1.6] max-w-2xl">
+    <section class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-4 px-gutter w-full max-w-content mx-auto pt-page">
+      <h1 class="text-heading-lg font-medium">Mariah Gardziola</h1>
+      <p class="text-body text-muted max-w-2xl">
         Oregon-based web and interactive designer who leads teams in systems-driven growth design across web and product experiences.
       </p>
     </section>
 
     {/* Selected Work */}
-    <section aria-labelledby="selected-work-label" class="px-gutter max-w-content mx-auto flex flex-col gap-section-sm">
-      <h2 id="selected-work-label" class="text-heading-lg font-medium leading-[1.4]">Selected Work</h2>
+    <section aria-labelledby="selected-work-label" class="px-gutter w-full max-w-content mx-auto flex flex-col gap-section-sm">
+      <h2 id="selected-work-label" class="text-heading-lg font-medium">Selected Work</h2>
       {projects.map((project) => (
         <ProjectCard
           title={project.data.title}

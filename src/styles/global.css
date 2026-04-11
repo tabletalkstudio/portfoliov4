@@ -25,7 +25,7 @@
   --color-primitive-gray-200: #e5e5e5;
   --color-primitive-gray-400: #a3a3a3;
   --color-primitive-gray-500: #737373;
-  --color-primitive-gray-600: #525252;
+  --color-primitive-gray-600: #606060;
   --color-primitive-gray-800: #262626;
   --color-primitive-gray-900: #171717;
   --color-primitive-gray-950: #0a0a0a;
@@ -47,25 +47,32 @@
 
   /* --- Semantic Typography --- */
   --text-heading-lg: 1.25rem;
-  --text-heading-lg--line-height: 1.4;
+  --text-heading-lg--line-height: 1.1;
   --text-heading-lg--font-weight: 500;
+  --text-heading-lg--letter-spacing: -0.02em;
 
-  --text-body: 1.125rem;
-  --text-body--line-height: 1.6;
+  --text-body: 1.25rem;
+  --text-body--line-height: 1.1;
+  --text-body--letter-spacing: -0.02em;
 
-  --text-body-sm: 1rem;
-  --text-body-sm--line-height: 1.5;
+  --text-body-sm: 1.25rem;
+  --text-body-sm--line-height: 1.1;
+  --text-body-sm--letter-spacing: -0.02em;
 
-  --text-caption: 0.875rem;
-  --text-caption--line-height: 1.5;
+  --text-caption: 1.25rem;
+  --text-caption--line-height: 1.1;
+  --text-caption--letter-spacing: -0.02em;
 
   /* --- Semantic Spacing --- */
   --spacing-section: 6rem;
   --spacing-section-sm: 3rem;
   --spacing-gutter: 1.25rem;
+  --spacing-col-gap: 2.5rem;
+  --spacing-col-gap-tablet: 1.25rem;
+  --spacing-page-top: 260px;
 
   /* --- Layout --- */
-  --max-w-content: 1280px;
+  --max-width-content: 1600px;
 }
 
 /* ============================================================
@@ -76,6 +83,8 @@ html {
   background-color: var(--color-surface);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -108,6 +117,31 @@ html {
 :focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
+}
+
+/* Page top padding — 140px mobile, 160px tablet, 260px desktop */
+.pt-page {
+  padding-top: 140px;
+}
+@media (min-width: 768px) {
+  .pt-page {
+    padding-top: 160px;
+  }
+}
+@media (min-width: 1024px) {
+  .pt-page {
+    padding-top: 260px;
+  }
+}
+
+/* Responsive typography — 18px on tablet and mobile */
+@media (max-width: 1023px) {
+  :root {
+    --text-body: 1.125rem;
+    --text-body-sm: 1.125rem;
+    --text-caption: 1.125rem;
+    --text-heading-lg: 1.125rem;
+  }
 }
 
 /* Reduced motion */
