@@ -12,15 +12,15 @@ interface Props {
 const { title, description, credits, heroImage, heroImageAlt } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-4 px-gutter w-full max-w-content mx-auto">
-  <div class="flex flex-col gap-4">
+<div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10 px-gutter w-full max-w-content mx-auto">
+  <div class="flex flex-col gap-10">
     <div>
       <h1 class="text-heading-lg font-medium">{title}</h1>
       <p class="text-body-sm text-muted">{description}</p>
     </div>
     {credits && credits.length > 0 && (
       <div>
-        <p class="text-heading-lg font-medium">Credits</p>
+        <p class="text-heading-lg">Credits</p>
         <p class="text-body-sm text-muted">{credits.join(", ")}</p>
       </div>
     )}

@@ -12,11 +12,11 @@ interface Props {
 const { title, description, slug, image, imageAlt } = Astro.props;
 ---
 
-<article class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-4">
-  <div class="flex flex-col gap-2">
-    <h3 class="text-heading-lg font-medium">{title}</h3>
+<article class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10">
+  <div class="flex flex-col gap-5">
+    <h3 class="text-heading-lg">{title}</h3>
     <p class="text-body-sm text-muted">{description}</p>
-    <a href={`/projects/${slug}`} class="text-body-sm font-medium underline text-foreground">
+    <a href={`/projects/${slug}`} class="text-body-sm link-underline text-foreground">
       Read case study
     </a>
   </div>

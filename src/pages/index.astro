@@ -14,7 +14,7 @@ const projects = (await getCollection("projects")).sort(
 <BaseLayout title="Mariah Gardziola — Product Design">
   <div class="flex flex-col gap-section">
     {/* Hero */}
-    <section class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-4 px-gutter w-full max-w-content mx-auto pt-page">
+    <section class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10 px-gutter w-full max-w-content mx-auto pt-page">
       <h1 class="text-heading-lg font-medium">Mariah Gardziola</h1>
       <p class="text-body text-muted max-w-2xl">
         Oregon-based web and interactive designer who leads teams in systems-driven growth design across web and product experiences.
@@ -22,7 +22,7 @@ const projects = (await getCollection("projects")).sort(
     </section>
 
     {/* Selected Work */}
-    <section aria-labelledby="selected-work-label" class="px-gutter w-full max-w-content mx-auto flex flex-col gap-section-sm">
+    <section aria-labelledby="selected-work-label" class="px-gutter w-full max-w-content mx-auto flex flex-col gap-10">
       <h2 id="selected-work-label" class="text-heading-lg font-medium">Selected Work</h2>
       {projects.map((project) => (
         <ProjectCard
@@ -35,47 +35,51 @@ const projects = (await getCollection("projects")).sort(
       ))}
     </section>
 
-    {/* Background */}
-    <SectionRow label="Background" id="background">
-      <div class="flex flex-col gap-section-sm">
-        <TimelineEntry
-          company="Adobe"
-          roles={[
-            { title: "Staff Product Designer, Growth", dates: "5.25—Present" },
-            { title: "Senior Product Designer, Growth", dates: "5.24—5.25" },
-          ]}
-        />
-        <TimelineEntry
-          company="Mission Lane"
-          roles={[
-            { title: "Sr Growth UX Design Manager", dates: "08.22—03.24" },
-          ]}
-        />
-        <TimelineEntry
-          company="Thimble"
-          roles={[
-            { title: "Design Director, Web Experience", dates: "12.21 – 08.22" },
-            { title: "Senior Designer", dates: "12.20 – 12.21" },
-          ]}
-        />
-        <TimelineEntry
-          company="Billtrust"
-          roles={[
-            { title: "Digital Designer", dates: "05.19 – 11.20" },
-          ]}
-        />
+    {/* Background + Clients */}
+    <section id="background" aria-labelledby="background-label" class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10 px-gutter w-full max-w-content mx-auto">
+      <h2 id="background-label" class="text-heading-lg font-medium">Background</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-40">
+        <div class="flex flex-col gap-section-sm">
+          <TimelineEntry
+            company="Adobe"
+            roles={[
+              { title: "Staff Product Designer, Growth", dates: "5.25—Present" },
+              { title: "Senior Product Designer, Growth", dates: "5.24—5.25" },
+            ]}
+          />
+          <TimelineEntry
+            company="Mission Lane"
+            roles={[
+              { title: "Sr Growth UX Design Manager", dates: "08.22—03.24" },
+            ]}
+          />
+          <TimelineEntry
+            company="Thimble"
+            roles={[
+              { title: "Design Director, Web Experience", dates: "12.21 – 08.22" },
+              { title: "Senior Designer", dates: "12.20 – 12.21" },
+            ]}
+          />
+          <TimelineEntry
+            company="Billtrust"
+            roles={[
+              { title: "Digital Designer", dates: "05.19 – 11.20" },
+            ]}
+          />
+        </div>
+        <div>
+          <h3 class="text-heading-lg">Clients</h3>
+          <div class="mt-10">
+            <TagList items={[
+              "Adidas", "Adobe", "Spotify", "True Value", "Sunlife", "Cabela's",
+              "Archrival", "Wake Forest Law School", "Office of Experience", "Tallied",
+              "Pawp", "Pure Michigan", "Museum of Science & Industry", "Thresholds",
+              "Detroit City Football Club", "Lightci"
+            ]} />
+          </div>
+        </div>
       </div>
-    </SectionRow>
-
-    {/* Clients */}
-    <SectionRow label="Clients" id="clients">
-      <TagList items={[
-        "Adidas", "Adobe", "Spotify", "True Value", "Sunlife", "Cabela's",
-        "Archrival", "Wake Forest Law School", "Office of Experience", "Tallied",
-        "Pawp", "Pure Michigan", "Museum of Science & Industry", "Thresholds",
-        "Detroit City Football Club", "Lightci"
-      ]} />
-    </SectionRow>
+    </section>
 
     {/* Tools */}
     <SectionRow label="Tools" id="tools">

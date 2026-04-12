@@ -48,7 +48,7 @@
   /* --- Semantic Typography --- */
   --text-heading-lg: 1.25rem;
   --text-heading-lg--line-height: 1.1;
-  --text-heading-lg--font-weight: 500;
+  --text-heading-lg--font-weight: 400;
   --text-heading-lg--letter-spacing: -0.02em;
 
   --text-body: 1.25rem;
@@ -63,16 +63,19 @@
   --text-caption--line-height: 1.1;
   --text-caption--letter-spacing: -0.02em;
 
-  /* --- Semantic Spacing --- */
-  --spacing-section: 6rem;
-  --spacing-section-sm: 3rem;
-  --spacing-gutter: 1.25rem;
-  --spacing-col-gap: 2.5rem;
-  --spacing-col-gap-tablet: 1.25rem;
-  --spacing-page-top: 260px;
+  /* --- Semantic Spacing (base-10) --- */
+  --spacing-5: 5px;
+  --spacing-10: 10px;
+  --spacing-15: 15px;
+  --spacing-20: 20px;
+  --spacing-40: 40px;
+  --spacing-section: 40px;
+  --spacing-section-sm: 40px;
+  --spacing-gutter: 10px;
 
   /* --- Layout --- */
-  --max-width-content: 1600px;
+  --max-width-content: 1800px;
+  --breakpoint-lg: 1200px;
 }
 
 /* ============================================================
@@ -113,6 +116,14 @@ html {
   overflow: visible;
 }
 
+/* Link underline — 1px solid, 2px offset */
+.link-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  text-decoration-skip-ink: auto;
+}
+
 /* Focus styles */
 :focus-visible {
   outline: 2px solid var(--color-focus-ring);
@@ -128,14 +139,21 @@ html {
     padding-top: 160px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .pt-page {
     padding-top: 260px;
   }
 }
 
+/* Responsive gutter — 10px mobile, 20px tablet+ */
+@media (min-width: 768px) {
+  :root {
+    --spacing-gutter: 20px;
+  }
+}
+
 /* Responsive typography — 18px on tablet and mobile */
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   :root {
     --text-body: 1.125rem;
     --text-body-sm: 1.125rem;
