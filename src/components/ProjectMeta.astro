@@ -11,7 +11,7 @@ const { company, role, years } = Astro.props;
 {/* Mobile: company 30% + role 70% top row, years full width below */}
 {/* Desktop: company in 1fr left column, role + years in 3fr right column */}
 <div class="px-gutter w-full max-w-content mx-auto mb-[20px] md:mb-[30px] lg:mb-[40px]">
-  <div class="grid grid-cols-[30%_1fr] md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-5">
+  <div class="grid grid-cols-[30%_1fr] md:grid-cols-[20%_60%] gap-x-5 md:gap-x-10 gap-y-5">
     <div class="flex flex-col gap-5">
       <p class="text-body-sm text-muted">company</p>
       <p class="text-heading-lg">{company}</p>
