@@ -38,8 +38,8 @@ const projects = (await getCollection("projects")).sort(
     {/* Background + Clients */}
     <section id="background" aria-labelledby="background-label" class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10 px-gutter w-full max-w-content mx-auto">
       <h2 id="background-label" class="text-heading-lg font-medium">Background</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-40">
-        <div class="flex flex-col gap-section-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-[20px] lg:gap-x-[40px] gap-y-40">
+        <div class="flex flex-col gap-10">
           <TimelineEntry
             company="Adobe"
             roles={[
