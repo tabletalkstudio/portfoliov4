@@ -22,7 +22,7 @@ const projects = (await getCollection("projects")).sort(
     </section>
 
     {/* Selected Work */}
-    <section aria-labelledby="selected-work-label" class="px-gutter w-full max-w-content mx-auto flex flex-col gap-10">
+    <section aria-labelledby="selected-work-label" class="px-gutter w-full max-w-content mx-auto flex flex-col gap-[20px] md:gap-10">
       <h2 id="selected-work-label" class="text-heading-lg font-medium">Selected Work</h2>
       {projects.map((project) => (
         <ProjectCard
@@ -69,7 +69,7 @@ const projects = (await getCollection("projects")).sort(
         </div>
         <div>
           <h3 class="text-heading-lg">Clients</h3>
-          <div class="mt-10">
+          <div>
             <TagList items={[
               "Adidas", "Adobe", "Spotify", "True Value", "Sunlife", "Cabela's",
               "Archrival", "Wake Forest Law School", "Office of Experience", "Tallied",

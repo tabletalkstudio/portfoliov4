@@ -10,9 +10,9 @@ const { company, roles } = Astro.props;
 <div class="flex flex-col gap-0">
   <p class="text-heading-lg">{company}</p>
   {roles.map((role) => (
-    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-x-10">
+    <div class="flex justify-between items-baseline gap-x-10">
       <p class="text-body-sm text-muted">{role.title}</p>
-      <p class="text-body-sm text-muted">{role.dates}</p>
+      <p class="text-body-sm text-muted text-right w-[33%] md:w-auto shrink-0">{role.dates}</p>
     </div>
   ))}
 </div>
