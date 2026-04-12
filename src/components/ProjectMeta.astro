@@ -8,17 +8,25 @@ interface Props {
 const { company, role, years } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10 px-gutter w-full max-w-content mx-auto mb-[20px] md:mb-[30px] lg:mb-[40px]">
-  <div>
-    <p class="text-body-sm text-muted">company</p>
-    <p class="text-heading-lg">{company}</p>
-  </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div>
-      <p class="text-body-sm text-muted">role</p>
-      <p class="text-heading-lg">{role}</p>
+{/* Mobile: company 30% + role 70% top row, years full width below */}
+{/* Desktop: company in 1fr left column, role + years in 3fr right column */}
+<div class="px-gutter w-full max-w-content mx-auto mb-[20px] md:mb-[30px] lg:mb-[40px]">
+  <div class="grid grid-cols-[30%_1fr] md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-5">
+    <div class="flex flex-col gap-5">
+      <p class="text-body-sm text-muted">company</p>
+      <p class="text-heading-lg">{company}</p>
     </div>
-    <div>
+    <div class="md:grid md:grid-cols-2 md:gap-4">
+      <div class="flex flex-col gap-5">
+        <p class="text-body-sm text-muted">role</p>
+        <p class="text-heading-lg">{role}</p>
+      </div>
+      <div class="hidden md:flex md:flex-col md:gap-5">
+        <p class="text-body-sm text-muted">years</p>
+        <p class="text-heading-lg">{years}</p>
+      </div>
+    </div>
+    <div class="col-span-full md:hidden flex flex-col gap-5">
       <p class="text-body-sm text-muted">years</p>
       <p class="text-heading-lg">{years}</p>
     </div>
