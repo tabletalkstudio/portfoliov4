@@ -20,7 +20,7 @@ const { title, description, slug, image, imageAlt } = Astro.props;
       Read case study
     </a>
   </div>
-  <div>
+  <a href={`/projects/${slug}`} tabindex="-1">
     <Image
       src={image}
       alt={imageAlt}
@@ -29,5 +29,5 @@ const { title, description, slug, image, imageAlt } = Astro.props;
       widths={[640, 960, 1280]}
       sizes="(max-width: 768px) 100vw, 75vw"
     />
-  </div>
+  </a>
 </article>
