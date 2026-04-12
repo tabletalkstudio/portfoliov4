@@ -49,7 +49,7 @@ const { title, description, slug, image, imageAlt } = Astro.props;
       height: 70px;
       opacity: 0;
       transform: scale(0.4);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.4s ease, transform 0.4s ease;
       will-change: transform, opacity, left, top;
     }
 
@@ -73,42 +73,47 @@ const { title, description, slug, image, imageAlt } = Astro.props;
       if (!cursor || cursor.dataset.init) return;
       cursor.dataset.init = '1';
 
-      let targetX = 0;
-      let targetY = 0;
+      let mouseX = 0;
+      let mouseY = 0;
       let currentX = 0;
       let currentY = 0;
       let rafId: number | null = null;
+      let isHovering = false;
 
-      function lerp(start: number, end: number, factor: number) {
-        return start + (end - start) * factor;
+      function lerp(a: number, b: number, t: number) {
+        return a + (b - a) * t;
       }
 
-      function animate() {
-        currentX = lerp(currentX, targetX, 0.08);
-        currentY = lerp(currentY, targetY, 0.08);
+      function update() {
+        const rect = (link as HTMLElement).getBoundingClientRect();
+        const targetX = mouseX - rect.left - 50;
+        const targetY = mouseY - rect.top - 35;
+        currentX = lerp(currentX, targetX, 0.12);
+        currentY = lerp(currentY, targetY, 0.12);
         cursor.style.left = `${currentX}px`;
         cursor.style.top = `${currentY}px`;
-        rafId = requestAnimationFrame(animate);
+        if (isHovering) rafId = requestAnimationFrame(update);
       }
 
       link.addEventListener('mouseenter', (e) => {
+        isHovering = true;
+        mouseX = (e as MouseEvent).clientX;
+        mouseY = (e as MouseEvent).clientY;
         const rect = (link as HTMLElement).getBoundingClientRect();
-        currentX = (e as MouseEvent).clientX - rect.left - 50;
-        currentY = (e as MouseEvent).clientY - rect.top - 35;
-        targetX = currentX;
-        targetY = currentY;
+        currentX = mouseX - rect.left - 50;
+        currentY = mouseY - rect.top - 35;
         cursor.style.left = `${currentX}px`;
         cursor.style.top = `${currentY}px`;
-        if (!rafId) rafId = requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(update);
       });
 
       link.addEventListener('mousemove', (e) => {
-        const rect = (link as HTMLElement).getBoundingClientRect();
-        targetX = (e as MouseEvent).clientX - rect.left - 50;
-        targetY = (e as MouseEvent).clientY - rect.top - 35;
+        mouseX = (e as MouseEvent).clientX;
+        mouseY = (e as MouseEvent).clientY;
       });
 
       link.addEventListener('mouseleave', () => {
+        isHovering = false;
         if (rafId) {
           cancelAnimationFrame(rafId);
           rafId = null;
