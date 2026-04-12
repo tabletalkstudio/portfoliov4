@@ -20,7 +20,7 @@ const { title, description, slug, image, imageAlt } = Astro.props;
       Read case study
     </a>
   </div>
-  <a href={`/projects/${slug}`} tabindex="-1">
+  <a href={`/projects/${slug}`} tabindex="-1" class="project-image-link relative block cursor-none">
     <Image
       src={image}
       alt={imageAlt}
@@ -29,5 +29,77 @@ const { title, description, slug, image, imageAlt } = Astro.props;
       widths={[640, 960, 1280]}
       sizes="(max-width: 768px) 100vw, 75vw"
     />
+    <span class="view-cursor pointer-events-none absolute flex items-center justify-center rounded-full bg-foreground text-surface text-caption" aria-hidden="true">view</span>
   </a>
 </article>
+
+<style>
+  .view-cursor {
+    width: 100px;
+    height: 70px;
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    will-change: transform, opacity, left, top;
+  }
+
+  .project-image-link:hover .view-cursor {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+
+<script>
+  function initViewCursors() {
+    document.querySelectorAll('.project-image-link').forEach((link) => {
+      const cursor = link.querySelector('.view-cursor') as HTMLElement;
+      if (!cursor || cursor.dataset.init) return;
+      cursor.dataset.init = '1';
+
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let rafId: number | null = null;
+
+      function lerp(start: number, end: number, factor: number) {
+        return start + (end - start) * factor;
+      }
+
+      function animate() {
+        currentX = lerp(currentX, targetX, 0.08);
+        currentY = lerp(currentY, targetY, 0.08);
+        cursor.style.left = `${currentX}px`;
+        cursor.style.top = `${currentY}px`;
+        rafId = requestAnimationFrame(animate);
+      }
+
+      link.addEventListener('mouseenter', (e) => {
+        const rect = (link as HTMLElement).getBoundingClientRect();
+        currentX = (e as MouseEvent).clientX - rect.left - 50;
+        currentY = (e as MouseEvent).clientY - rect.top - 35;
+        targetX = currentX;
+        targetY = currentY;
+        cursor.style.left = `${currentX}px`;
+        cursor.style.top = `${currentY}px`;
+        if (!rafId) rafId = requestAnimationFrame(animate);
+      });
+
+      link.addEventListener('mousemove', (e) => {
+        const rect = (link as HTMLElement).getBoundingClientRect();
+        targetX = (e as MouseEvent).clientX - rect.left - 50;
+        targetY = (e as MouseEvent).clientY - rect.top - 35;
+      });
+
+      link.addEventListener('mouseleave', () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      });
+    });
+  }
+
+  initViewCursors();
+  document.addEventListener('astro:after-swap', initViewCursors);
+</script>
