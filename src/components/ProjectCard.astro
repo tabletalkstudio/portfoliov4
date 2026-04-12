@@ -13,14 +13,14 @@ const { title, description, slug, image, imageAlt } = Astro.props;
 ---
 
 <article class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10">
-  <div class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5 order-last md:order-first">
     <h3 class="text-heading-lg">{title}</h3>
     <p class="text-body-sm text-muted">{description}</p>
     <a href={`/projects/${slug}`} class="text-body-sm link-underline text-foreground">
       Read case study
     </a>
   </div>
-  <a href={`/projects/${slug}`} tabindex="-1" class="project-image-link relative block cursor-none">
+  <a href={`/projects/${slug}`} tabindex="-1" class="project-image-link relative block order-first md:order-last">
     <Image
       src={image}
       alt={imageAlt}
@@ -35,22 +35,35 @@ const { title, description, slug, image, imageAlt } = Astro.props;
 
 <style>
   .view-cursor {
-    width: 100px;
-    height: 70px;
-    opacity: 0;
-    transform: scale(0.4);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    will-change: transform, opacity, left, top;
+    display: none;
   }
 
-  .project-image-link:hover .view-cursor {
-    opacity: 1;
-    transform: scale(1);
+  @media (hover: hover) and (pointer: fine) {
+    .project-image-link {
+      cursor: none;
+    }
+
+    .view-cursor {
+      display: flex;
+      width: 100px;
+      height: 70px;
+      opacity: 0;
+      transform: scale(0.4);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      will-change: transform, opacity, left, top;
+    }
+
+    .project-image-link:hover .view-cursor {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 </style>
 
 <script>
   function initViewCursors() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
     document.querySelectorAll('.project-image-link').forEach((link) => {
       const cursor = link.querySelector('.view-cursor') as HTMLElement;
       if (!cursor || cursor.dataset.init) return;
