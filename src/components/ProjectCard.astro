@@ -12,7 +12,7 @@ interface Props {
 const { title, description, slug, image, imageAlt } = Astro.props;
 ---
 
-<article class="grid grid-cols-1 md:grid-cols-[20%_60%] gap-x-5 md:gap-x-10 gap-y-10">
+<article class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10">
   <div class="flex flex-col gap-5 order-last md:order-first">
     <h3 class="text-heading-lg">{title}</h3>
     <p class="text-body-sm text-muted">{description}</p>
