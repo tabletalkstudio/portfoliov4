@@ -1,0 +1,90 @@
+---
+interface Props {
+  src: string;
+  poster?: string;
+  alt?: string;
+}
+
+const { src, poster, alt = "Case study video" } = Astro.props;
+---
+
+<div class="video-section relative bg-black py-[40px] lg:py-[60px]">
+  <div class="mx-auto w-[85%]">
+    <video
+      class="video-player w-full h-auto rounded-[8px] lg:rounded-[16px]"
+      autoplay
+      loop
+      muted
+      playsinline
+      poster={poster}
+      aria-label={alt}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  </div>
+  <button
+    class="video-toggle absolute bottom-[10px] right-[10px] w-[36px] h-[36px] flex items-center justify-center rounded-full bg-white/20 text-white cursor-pointer hover:bg-white/30 transition-colors duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-white"
+    aria-label="Pause video"
+    type="button"
+  >
+    <svg class="pause-icon w-[14px] h-[14px]" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+      <rect x="2" y="1" width="3.5" height="12" rx="0.5" />
+      <rect x="8.5" y="1" width="3.5" height="12" rx="0.5" />
+    </svg>
+    <svg class="play-icon w-[14px] h-[14px] hidden" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+      <path d="M3 1.5v11l9-5.5z" />
+    </svg>
+  </button>
+</div>
+
+<script>
+  function initVideoSections() {
+    document.querySelectorAll('.video-player').forEach((video) => {
+      const el = video as HTMLVideoElement;
+      const section = el.closest('.video-section');
+      if (!section || (section as HTMLElement).dataset.videoInit) return;
+      (section as HTMLElement).dataset.videoInit = '1';
+
+      const btn = section.querySelector('.video-toggle') as HTMLButtonElement;
+      const pauseIcon = section.querySelector('.pause-icon') as SVGElement;
+      const playIcon = section.querySelector('.play-icon') as SVGElement;
+
+      if (!btn || !pauseIcon || !playIcon) return;
+
+      // Respect prefers-reduced-motion
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (motionQuery.matches) {
+        el.pause();
+        pauseIcon.classList.add('hidden');
+        playIcon.classList.remove('hidden');
+        btn.setAttribute('aria-label', 'Play video');
+      }
+
+      motionQuery.addEventListener('change', (e) => {
+        if (e.matches) {
+          el.pause();
+          pauseIcon.classList.add('hidden');
+          playIcon.classList.remove('hidden');
+          btn.setAttribute('aria-label', 'Play video');
+        }
+      });
+
+      btn.addEventListener('click', () => {
+        if (el.paused) {
+          el.play();
+          pauseIcon.classList.remove('hidden');
+          playIcon.classList.add('hidden');
+          btn.setAttribute('aria-label', 'Pause video');
+        } else {
+          el.pause();
+          pauseIcon.classList.add('hidden');
+          playIcon.classList.remove('hidden');
+          btn.setAttribute('aria-label', 'Play video');
+        }
+      });
+    });
+  }
+
+  initVideoSections();
+  document.addEventListener('astro:after-swap', initVideoSections);
+</script>

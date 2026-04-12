@@ -1,0 +1,15 @@
+---
+interface Props {
+  size?: "sm" | "md" | "lg";
+}
+
+const { size = "md" } = Astro.props;
+
+const classes = {
+  sm: "h-[5px] md:h-[10px]",
+  md: "h-[10px] md:h-[20px]",
+  lg: "h-[20px] md:h-[30px]",
+};
+---
+
+<div class={classes[size]} aria-hidden="true"></div>
