@@ -14,6 +14,7 @@ slug: "express-home"
 
 import ImageGrid from "../../components/ImageGrid.astro";
 import VideoSection from "../../components/VideoSection.astro";
+import Figure from "../../components/Figure.astro";
 import { Image } from "astro:assets";
 import heroImg from "../../assets/images/projects/adobe-express/hero.png";
 
@@ -21,15 +22,15 @@ import heroImg from "../../assets/images/projects/adobe-express/hero.png";
 
 Accessibility issues, over-productized page, a million colors, campaign imagery divorced from the organic audience... opportunity abounds, but how to bring shape to such a confused space? First, focus on distilling goal: convert more prospects in the consideration phase to active users. The bulk of this project was spent wading through a new and complex org—understanding previous tests and outcomes, defining success, acquainting myself with the current design systems at play, and ensuring I had the right review and approvals process in place to lock in alignment.
 
-Inherited design direction.
+<Figure caption="Inherited design direction.">
+  <Image src={heroImg} alt="Original Adobe Express homepage design" />
+</Figure>
 
 ## Directions abound
 
 We started from a visual expression that was really loud with conflicting color stories that didn't reflect a future facing brand. There were several systems available to us to pull from design-wise, but none through our current code base. Each system was possible, but it's wasn't that it was the right choice.
 
-So many systems, nary a clear path in sight.
-
-<ImageGrid>
+<ImageGrid caption="So many systems, nary a clear path in sight.">
   <Image src={heroImg} alt="Express direction exploration 1" />
   <Image src={heroImg} alt="Express direction exploration 2" />
 </ImageGrid>
@@ -40,7 +41,9 @@ I made the choice to pull inspiration from the adobe.com homepage at the time, d
 
 Despite many a prototype in Webflow of more experimental motion and interaction patterns, we landed on a direction that the principal PM at the helm was very set on. While there were concessions made on my end in this first project, I was there not to win a battle but to win a war of driving strategy instead of just responding to PRDs.
 
-Initial homepage test.
+<Figure caption="Initial homepage test.">
+  <Image src={heroImg} alt="First homepage test design" />
+</Figure>
 
 ## Results
 
@@ -52,9 +55,11 @@ We needed to keep moving through the roadmap, but this work was far from done. O
 
 Once I finally had a grasp on the team, I started planning vision sprint work across my team and the content designers. We revved on what the future of the surface could look like and pushed on concepts that tried new visual expression and narrative storytelling. We landed somewhere visually that was influenced by work happening by a central redesign effort heavily influenced by our expertise in our users and product.
 
-Future state. Credit to Mairi Watson, Julia Haney, Magdalena Long, Sal Ghaffarsamar.
-
 <VideoSection src="/videos/homepage-desktop.mp4" alt="Adobe Express future state homepage walkthrough" />
+
+<Figure caption="Future state. Credit to Mairi Watson, Julia Haney, Magdalena Long, Sal Ghaffarsamar.">
+  <Image src={heroImg} alt="Future state homepage design" />
+</Figure>
 
 ## Testing into the future
 
