@@ -1,9 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
-
 const currentPath = Astro.url.pathname;
-const allProjects = await getCollection('projects');
-const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <header class="px-gutter py-10 md:py-20">
@@ -11,37 +7,19 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
     <a href="/" class="text-heading-lg font-medium text-foreground nav-link">mng</a>
     <div class="flex items-center gap-15">
       <a
+        href="/"
+        class="text-heading-lg font-medium text-foreground nav-link"
+        aria-current={currentPath === "/" ? "page" : undefined}
+      >
+        work
+      </a>
+      <a
         href="/about"
         class="text-heading-lg font-medium text-foreground nav-link"
         aria-current={currentPath === "/about" ? "page" : undefined}
       >
         about
       </a>
-      <div class="work-dropdown" id="work-dropdown">
-        <button
-          type="button"
-          class="text-heading-lg font-medium text-foreground nav-link work-trigger"
-          aria-haspopup="menu"
-          aria-expanded="false"
-          id="work-trigger"
-        >
-          work
-        </button>
-        <ul class="work-pills" role="menu" aria-label="Work case studies" id="work-pills">
-          {projects.map((project, i) => (
-            <li class="pill-item" role="none" style={`--i: ${i};`}>
-              <a
-                href={`/projects/${project.data.slug}`}
-                class="pill"
-                role="menuitem"
-                tabindex="-1"
-              >
-                {project.data.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   </nav>
 </header>
@@ -56,188 +34,4 @@ const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
     text-underline-offset: 2px;
     text-decoration-skip-ink: auto;
   }
-
-  .work-trigger {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .work-trigger:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  .work-dropdown {
-    position: relative;
-  }
-
-  /* Pills container — absolutely positioned below "work" */
-  .work-pills {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: calc(5px - var(--spacing-gutter));
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    pointer-events: none;
-  }
-
-  /* Closed: all pills stacked at pill-0's position, scaled down */
-  .pill-item {
-    opacity: 0;
-    transform: translateY(calc(-1 * var(--i, 0) * 56px)) scale(0.7);
-    pointer-events: none;
-    /* transition set by JS */
-  }
-
-  /* Open state */
-  .work-dropdown.is-open .work-pills {
-    pointer-events: auto;
-  }
-
-  .work-dropdown.is-open .pill-item {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-
-  .pill {
-    display: block;
-    background: var(--color-border);
-    color: var(--color-foreground);
-    padding: 12px 15px;
-    border-radius: 999px;
-    font-size: var(--text-heading-lg);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  .pill:hover,
-  .pill:focus-visible {
-    background: var(--color-foreground);
-    color: var(--color-surface);
-    outline: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pill-item {
-      transform: none !important;
-      transition: opacity 150ms ease !important;
-    }
-  }
 </style>
-
-<script>
-  (() => {
-    const dropdown = document.getElementById('work-dropdown') as HTMLElement;
-    const trigger = document.getElementById('work-trigger') as HTMLButtonElement;
-    const pillItems = Array.from(dropdown.querySelectorAll<HTMLElement>('.pill-item'));
-    const menuItems = Array.from(dropdown.querySelectorAll<HTMLAnchorElement>('[role="menuitem"]'));
-
-    let isOpen = false;
-    let closeTimer: ReturnType<typeof setTimeout> | null = null;
-
-    function setOpenTransitions() {
-      pillItems.forEach((pill, i) => {
-        if (i === 0) {
-          // First pill: pop in with overshoot
-          pill.style.transition = 'transform 320ms cubic-bezier(.34,1.56,.64,1), opacity 220ms ease';
-          pill.style.transitionDelay = '0ms';
-        } else {
-          // Remaining pills: spring fall with stagger
-          pill.style.transition = 'transform 520ms cubic-bezier(.34,1.28,.56,1), opacity 220ms ease';
-          pill.style.transitionDelay = `${80 + (i - 1) * 55}ms`;
-        }
-      });
-    }
-
-    function setCloseTransitions() {
-      // Reverse stagger: last pill leaves first
-      const last = pillItems.length - 1;
-      pillItems.forEach((pill, i) => {
-        pill.style.transitionDelay = `${(last - i) * 35}ms`;
-      });
-    }
-
-    function open() {
-      if (isOpen) return;
-      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-      isOpen = true;
-      setOpenTransitions();
-      dropdown.classList.add('is-open');
-      trigger.setAttribute('aria-expanded', 'true');
-      menuItems.forEach(item => { item.tabIndex = 0; });
-    }
-
-    function close() {
-      if (!isOpen) return;
-      isOpen = false;
-      setCloseTransitions();
-      dropdown.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
-      menuItems.forEach(item => { item.tabIndex = -1; });
-    }
-
-    function scheduleClose() {
-      closeTimer = setTimeout(close, 120);
-    }
-
-    function cancelClose() {
-      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-    }
-
-    dropdown.addEventListener('mouseenter', () => { cancelClose(); open(); });
-    dropdown.addEventListener('mouseleave', scheduleClose);
-
-    trigger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        isOpen ? close() : open();
-      } else if (e.key === 'Escape') {
-        close();
-        trigger.focus();
-      } else if (e.key === 'ArrowDown' && isOpen) {
-        e.preventDefault();
-        menuItems[0]?.focus();
-      }
-    });
-
-    menuItems.forEach((item, i) => {
-      item.addEventListener('keydown', (e) => {
-        switch (e.key) {
-          case 'Escape':
-            close();
-            trigger.focus();
-            break;
-          case 'ArrowDown':
-            e.preventDefault();
-            menuItems[i + 1]?.focus();
-            break;
-          case 'ArrowUp':
-            e.preventDefault();
-            i === 0 ? trigger.focus() : menuItems[i - 1]?.focus();
-            break;
-          case 'Tab':
-            close();
-            break;
-        }
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target as Node)) close();
-    });
-  })();
-</script>
