@@ -26,12 +26,14 @@ const currentPath = Astro.url.pathname;
 
 <style>
   .nav-link {
-    text-decoration: none;
-  }
-  .nav-link:hover {
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 2px;
     text-decoration-skip-ink: auto;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 200ms ease;
+  }
+  .nav-link:hover {
+    text-decoration-color: currentColor;
   }
 </style>
