@@ -14,24 +14,50 @@ order: 4
 slug: "thimble"
 ---
 
+import Figure from "../../components/Figure.astro";
+import { Image } from "astro:assets";
+import thimbleHome from "../../assets/images/projects/thimble/home.jpg";
+import thimbleCyber from "../../assets/images/projects/thimble/cyber.jpg";
+import thimbleContractors from "../../assets/images/projects/thimble/contractors.jpg";
+import returnToQuote from "../../assets/images/projects/thimble/return-to-quote.jpg";
+import Spacer from "../../components/Spacer.astro";
+
+<Spacer size="md" />
+
 ## Challenge
 
-Enter a high performance, fast moving team fresh out of a rebrand with a clunky WYSIWYG editor on top of Wordpress. Drive growth focused optimizations and full page redesigns on the logged out surface.
+Enter a high performance, fast moving team fresh out of a rebrand with a clunky WYSIWYG editor on top of Wordpress. During my time at Thimble, I drove growth focused optimizations and full page redesigns on the logged out surface as well as pioneering a design and motion system across marketing and product. I spent my days here building a comprehensive design ecosystem from Figma to code, collaborating with brand, growth, marketing, lifecyle, and product teams to build short and long term growth pipelines for the business. 
 
-Homepage redesign—10% increase in CTA clicks, 3.4% increase in transactions and a 7.8% decrease in bounce rate.
+<Spacer size="md" />
+
+<Figure caption="Homepage redesign—10% increase in CTA clicks, 3.4% increase in transactions and a 7.8% decrease in bounce rate.">
+  <Image src={thimbleHome} alt="Available design systems across Adobe included Consonant, Spectrum 2, and Express Product system." />
+</Figure>
+
+<Spacer size="md" />
 
 ## Results
 
-Designed and collaborated with engineers on an MVP design system, including a system of interaction animations, and moved the site from Elementor to ACF. This decreased go-live time across the project and reduced QA time and bloat on the site. After going live, we benefitted from a 32% increase in performance, 1.5 second decrease in time to LCP (largest contentful paint) and a reduction to 0 seconds total blocking time.
+Results
+Designed and collaborated with engineers on an MVP design system, including a system of interaction animations, and moved the site from Elementor to ACF. This decreased go-live time across the project and reduced QA time and bloat on the site. After going live, we benefitted from a <strong>32% increase</strong> in performance, <strong>1.5 second decrease</strong> in time to LCP (largest contentful paint) and a <strong>reduction to 0 seconds total blocking time</strong>.
 
-Once the design system was in place, I continued to test full page redesigns and optimizations. I solved for some core user experience issues and designed a new product page template, including adding the ability for a user to get a quote on page for their policy. This test saw a 13% increase in CTA clicks and a 2% increase in transactions.
+Once the design system was in place, I continued to test full page redesigns and optimiziations. I solved for some core user experience issues and designed a new product page template, including adding the ability for a user to get a quote on page for their policy. This test saw a <strong>13% increase in CTA clicks</strong> and a <strong>2% increase in transactions</strong>.
 
-A homepage redesign focused on improved brand expression and saw a 10% increase in CTA clicks, 3.4% increase in transactions and a 7.8% decrease in bounce rate.
+A homepage redesign focused on improved brand expression and saw a <strong>10% increase in CTA clicks</strong>, <strong>3.4% increase in transactions</strong> and a <strong>7.8% decrease in bounce rate</strong>.
 
-We also ran smaller optimizations that leveraged personalization for improved return to quote experiences. Our initial test ran over a few weeks and resulted in 1,353 more new leads and 6.5% increase in conversion (policies bound).
+We also ran smaller optimizations that leveraged personalization for improved return to quote experiences. Our initial test ran over a few weeks and resulted in <strong>1,353 more new leads</strong> and <strong>6.5% increase in conversion (policies bound)</strong>.
 
-Please reach out to learn more about this work and outcomes.
+<Spacer size="md" />
 
-Product page redesign—13% increase in CTA clicks and a 2% increase in transactions
+Please <a href="mailto:mariah@tabletalk.studo" target="_blank" rel="noopener noreferrer">reach out</a> 
+to learn more about use of Claude and Cursor in this work and outcomes.
 
-Return to quote optimization—1,353 more new leads and 6.5% increase in conversion (policies bound)
+<Spacer size="md" />
+
+<Figure caption="Product page redesign—13% increase in CTA clicks and a 2% increase in transactions.">
+  <Image src={thimbleCyber} alt="" />
+</Figure>
+
+<Figure caption="Return to quote optimization—1,353 more new leads and 6.5% increase in conversion (policies bound)">
+  <Image src={returnToQuote} alt="" />
+</Figure>

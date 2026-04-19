@@ -10,35 +10,80 @@ credits:
   - "Sal Ghaffarsamar"
   - "Mairi Watson"
   - "Julia Haney"
-protected: false
+  - "Qadir El-Amin"
+protected: true
 order: 1
 slug: "adobe-color"
 ---
+
+import ImageGrid from "../../components/ImageGrid.astro";
+import VideoSection from "../../components/VideoSection.astro";
+import Figure from "../../components/Figure.astro";
+import { Image } from "astro:assets";
+
+import heroImg from "../../assets/images/projects/adobe-express/hero.png";
+import ogDesktop from "../../assets/images/projects/adobe-color/og-color-desktop.png";
+import ogMobile from "../../assets/images/projects/adobe-color/og-color-mobile.png";
+import extractPalette from "../../assets/images/projects/adobe-color/palette-extract-seo.png";
+import extractTool from "../../assets/images/projects/adobe-color/palette-extract-tool.png";
+import paletteTool from "../../assets/images/projects/adobe-color/palette-tool.png";
+import contrastChecker from "../../assets/images/projects/adobe-color/contrast-checker.png";
+import paletteChecker from "../../assets/images/projects/adobe-color/contrast-palette-checker.png";
+import expressRedesign from "../../components/VideoSection.astro";
+import Spacer from "../../components/Spacer.astro";
+
+<Spacer size="md" />
 
 ## Challenge
 
 The ask from PM was "what if we took another look at Adobe Color?" We love ambiguity. I took this from a vague ask to tangible value by scoping and leveraging user research, developing POCs, proving business value and selling this up through product SVP. I pivoted from internal alignment, over to driving research, design, and dev requirements—creating a more usable, functional, and accessible experience for more than 15mil annual users visiting the previously abandoned Adobe Color experience.
 
+<Spacer size="md" />
+
 ## Where design started
 
-Desktop and mobile of the current experience
+<Spacer size="sm" />
+
+<Image src={ogDesktop} alt="Original Adobe Color design" />
+<Figure caption="Original Adobe Color design with outdated UI, missing mobile experiences, and disjointed flows.">
+  <Image src={ogMobile} alt="Original Adobe Color mobile design" />
+</Figure>
+
+<Spacer size="sm" />
 
 ## Results
 
 End to end redesign with improved functionality that ensure the user palette follows them across extract, palette generator, and accessibility features. Designed usable mobile experiences for each product with clear flows into CC library save and product. Completed comprehensive accessibility bluelines that ensure flows are intuitive for user regardless of vision, keyboard, or assistive technology usage.
 
-Extract palette SEO upload page introduces sample images and full screen drop zone.
+<Spacer size="sm" />
 
-Extract page product page introduces zoom state for fine grain control, tracks history, and supports palettes of 2-10 colors.
+<Figure caption="Extract palette SEO upload page introduces sample images and full screen drop zone.">
+  <Image src={extractPalette} alt="Updated extract palette SEO page" />
+</Figure>
 
-Palette builder launched with color wheel, primary color, and palette extractor as starting points.
+<Figure caption="Extract page product page introduces zoom state for fine grain control, tracks history, and supports palettes of 2-10 colors. ">
+  <Image src={extractTool} alt="Updated extract palette tool" />
+</Figure>
 
-Contrast checker includes your full palette for 1:1 comparison and provides education on WCAG requirements.
+<Figure caption="Palette builder launched with color wheel, primary color, and palette extractor as starting points.">
+  <Image src={paletteTool} alt="Full palette builder tool" />
+</Figure>
 
-Full palette color contrast checker supports up to 10 colors for expanded use cases.
+<Figure caption="Contrast checker includes your full palette for 1:1 comparison and provides education on WCAG requirements.">
+  <Image src={contrastChecker} alt="Updated Contrast Checker" />
+</Figure>
 
-Contrast checker includes your full palette for 1:1 comparison and provides education on WCAG requirements.
+<Figure caption="Full palette color contrast checker supports up to 10 colors for expanded use cases.">
+  <Image src={paletteChecker} alt="Full palette contrast checker tool" />
+</Figure>
 
-## Results
+<Spacer size="sm" />
 
-This work is in the final stretch of development and is targeted to go live in May. Please reach out to learn more about this work and outcomes.
+## Outcomes
+
+This work is in the final stretch of development and is targeted to go live in May. 
+
+Please <a href="mailto:mariah@tabletalk.studo" target="_blank" rel="noopener noreferrer">reach out</a> 
+to learn more about use of Claude and Cursor in this work and outcomes.
+
+<Spacer size="sm" />

@@ -14,21 +14,21 @@ const { company, role, years } = Astro.props;
   <div class="grid grid-cols-[30%_1fr] md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-5">
     <div class="flex flex-col gap-5">
       <p class="text-body-sm text-muted">company</p>
-      <p class="text-heading-lg">{company}</p>
+      <p class="text-heading-lg font-medium">{company}</p>
     </div>
     <div class="md:grid md:grid-cols-2 md:gap-4">
       <div class="flex flex-col gap-5">
         <p class="text-body-sm text-muted">role</p>
-        <p class="text-heading-lg">{role}</p>
+        <p class="text-heading-lg font-medium">{role}</p>
       </div>
       <div class="hidden md:flex md:flex-col md:gap-5">
         <p class="text-body-sm text-muted">years</p>
-        <p class="text-heading-lg">{years}</p>
+        <p class="text-heading-lg font-medium">{years}</p>
       </div>
     </div>
     <div class="col-span-full md:hidden flex flex-col gap-5">
       <p class="text-body-sm text-muted">years</p>
-      <p class="text-heading-lg">{years}</p>
+      <p class="text-heading-lg font-medium">{years}</p>
     </div>
   </div>
 </div>

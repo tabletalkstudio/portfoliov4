@@ -8,7 +8,7 @@ const { columns = 2, caption } = Astro.props;
 ---
 
 <figure>
-  <div class={`grid gap-[10px] lg:gap-[20px] [&_img]:!my-0 ${columns === 3 ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'}`}>
+  <div class={`grid gap-[10px] [&_img]:!my-0 [&_img]:w-full [&_img]:h-full [&_img]:object-cover ${columns === 3 ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'}`}>
     <slot />
   </div>
   {caption && (
