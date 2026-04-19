@@ -49,7 +49,7 @@ const { Content } = await render(project);
 
     <CaseStudyNav
       currentSlug={project.data.slug}
-      projects={allProjects.map((p) => ({ slug: p.data.slug, title: p.data.title }))}
+      projects={allProjects.map((p) => ({ slug: p.data.slug, title: p.data.title, heroImage: p.data.heroImage, heroImageAlt: p.data.heroImageAlt }))}
     />
   </div>
 </BaseLayout>

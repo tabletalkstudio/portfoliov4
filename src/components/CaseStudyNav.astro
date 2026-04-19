@@ -1,7 +1,12 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 interface Project {
   slug: string;
   title: string;
+  heroImage: ImageMetadata;
+  heroImageAlt: string;
 }
 
 interface Props {
@@ -13,18 +18,115 @@ const { currentSlug, projects } = Astro.props;
 const otherProjects = projects.filter((p) => p.slug !== currentSlug);
 ---
 
-<section aria-labelledby="more-studies-label" class="px-gutter w-full max-w-content mx-auto">
-  <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-x-5 md:gap-x-10 gap-y-10">
-    <h2 id="more-studies-label" class="text-heading-lg font-medium">
-      See more case studies
-    </h2>
-    <div class="flex flex-col gap-10">
-      <a href="/" class="text-body-sm link-underline text-foreground">See all</a>
-      {otherProjects.map((project) => (
-        <a href={`/projects/${project.slug}`} class="text-body-sm text-muted hover:text-foreground">
-          {project.title}
-        </a>
-      ))}
-    </div>
+<section aria-labelledby="more-studies-label" class="px-gutter w-full max-w-content mx-auto pt-[20px] md:pt-[30px] lg:pt-[40px]">
+  <h2 id="more-studies-label" class="text-heading-lg font-medium mb-[20px]">See more case studies</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-[10px]">
+    {otherProjects.map((project) => (
+      <a href={`/projects/${project.slug}`} class="case-study-link flex flex-col gap-[10px] group">
+        <div class="relative overflow-hidden aspect-video">
+          <Image
+            src={project.heroImage}
+            alt={project.heroImageAlt}
+            class="w-full h-full object-cover"
+          />
+          <span class="case-study-view-cursor pointer-events-none absolute flex items-center justify-center rounded-full bg-foreground text-surface text-caption" aria-hidden="true">view</span>
+        </div>
+        <p class="text-body-sm text-muted group-hover:text-foreground transition-colors">{project.title}</p>
+      </a>
+    ))}
   </div>
 </section>
+
+<style>
+  .case-study-view-cursor {
+    display: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .case-study-link {
+      cursor: none;
+    }
+
+    .case-study-view-cursor {
+      display: flex;
+      width: 100px;
+      height: 70px;
+      opacity: 0;
+      transform: scale(0.4);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      will-change: transform, opacity, left, top;
+    }
+
+    .case-study-link:hover .case-study-view-cursor {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .case-study-link:active .case-study-view-cursor {
+      transform: scale(0.8);
+    }
+  }
+</style>
+
+<script>
+  function initCaseStudyCursors() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    document.querySelectorAll('.case-study-link').forEach((link) => {
+      const imageWrapper = link.querySelector('.relative') as HTMLElement;
+      const cursor = link.querySelector('.case-study-view-cursor') as HTMLElement;
+      if (!cursor || cursor.dataset.init) return;
+      cursor.dataset.init = '1';
+
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let rafId: number | null = null;
+      let isHovering = false;
+
+      function lerp(a: number, b: number, t: number) {
+        return a + (b - a) * t;
+      }
+
+      function update() {
+        const rect = imageWrapper.getBoundingClientRect();
+        const targetX = mouseX - rect.left - 50;
+        const targetY = mouseY - rect.top - 35;
+        currentX = lerp(currentX, targetX, 0.12);
+        currentY = lerp(currentY, targetY, 0.12);
+        cursor.style.left = `${currentX}px`;
+        cursor.style.top = `${currentY}px`;
+        if (isHovering) rafId = requestAnimationFrame(update);
+      }
+
+      imageWrapper.addEventListener('mouseenter', (e) => {
+        isHovering = true;
+        mouseX = (e as MouseEvent).clientX;
+        mouseY = (e as MouseEvent).clientY;
+        const rect = imageWrapper.getBoundingClientRect();
+        currentX = mouseX - rect.left - 50;
+        currentY = mouseY - rect.top - 35;
+        cursor.style.left = `${currentX}px`;
+        cursor.style.top = `${currentY}px`;
+        rafId = requestAnimationFrame(update);
+      });
+
+      imageWrapper.addEventListener('mousemove', (e) => {
+        mouseX = (e as MouseEvent).clientX;
+        mouseY = (e as MouseEvent).clientY;
+      });
+
+      imageWrapper.addEventListener('mouseleave', () => {
+        isHovering = false;
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      });
+    });
+  }
+
+  initCaseStudyCursors();
+  document.addEventListener('astro:after-swap', initCaseStudyCursors);
+</script>
