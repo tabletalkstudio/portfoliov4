@@ -12,9 +12,33 @@ order: 3
 slug: "mission-lane"
 ---
 
+import ImageGrid from "../../components/ImageGrid.astro";
+import { Image } from "astro:assets";
+import spinningCard from "../../assets/images/projects/mission-lane/spinning-card.webp";
+import appMock from "../../assets/images/projects/mission-lane/app-mocks.webp";
+import mlMock from "../../assets/images/projects/mission-lane/ml-phone-mock.jpg";
+import Spacer from "../../components/Spacer.astro";
+
+<Spacer size="md" />
+
+
 ## Challenge
 
 When I joined Mission Lane the brand, growth, and acquisitions space had unclear ownership and no dedicated marketing or brand designers. This meant that product designers were begrudgingly designing social posts, emails and the like. I was hired as a player-coach manager to wrangle our house of brands (at the time there were 4 distinct ML products), manage a new hire marketing designer, the design system designer, and act as IC in the acquisitions experience.
+
+<Spacer size="md" />
+
+
+<ImageGrid>
+  <Image src={spinningCard} alt="Mission Lane app experience" />
+  <Image src={appMock} alt="3d card mock" />
+</ImageGrid>
+
+<Image src={mlMock} alt="" />
+
+<Spacer size="sm" />
+
+
 
 ## Results
 

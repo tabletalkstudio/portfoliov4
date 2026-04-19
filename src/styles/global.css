@@ -30,7 +30,7 @@
   --color-primitive-gray-800: #262626;
   --color-primitive-gray-900: #171717;
   --color-primitive-gray-950: #0a0a0a;
-  --color-primitive-blue-600: #2563eb;
+  --color-primitive-blue-600: #2222f4;
 
   /* --- Semantic Colors --- */
   --color-foreground: var(--color-primitive-gray-950);
