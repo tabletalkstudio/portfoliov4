@@ -41,7 +41,7 @@
   --color-button-bg: var(--color-primitive-gray-950);
   --color-button-fg: var(--color-primitive-white);
   --color-link: var(--color-primitive-blue-600);
-  --color-focus-ring: var(--color-primitive-gray-950);
+  --color-focus-ring: var(--color-primitive-blue-600);
 
   /* --- Font --- */
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
@@ -129,6 +129,7 @@ html {
 :focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
+  border-radius: 1px;
 }
 
 /* Page top padding — 140px mobile, 160px tablet, 260px desktop */
