@@ -11,9 +11,12 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "overrides": {
+    "path-to-regexp": "6.3.0"
+  },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
-    "@astrojs/vercel": "^10.0.4",
+    "@astrojs/vercel": "^10.0.5",
     "@tailwindcss/vite": "^4.2.2",
     "@vercel/analytics": "^2.0.1",
     "astro": "^6.1.5",
